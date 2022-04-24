@@ -2,6 +2,7 @@ const rootDir = require("app-root-path");
 const express = require("express");
 
 const getHello = require("./api/getHello");
+const getLikes = require("./api/getLikes");
 const postLike = require("./api/postLike");
 
 interface loadSettingsReturn {
@@ -35,5 +36,6 @@ try {
 const app = express();
 app.get(rootUrl, getHello);
 app.post(rootUrl + "/postLike/:id", postLike);
+app.get(rootUrl + "/getLikes", getLikes);
 
 module.exports = app;
