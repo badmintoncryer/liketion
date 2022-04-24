@@ -8,20 +8,20 @@ const http = require("http");
 
 const debug = require("debug")("src:server");
 
-const app = require("./app");
+const application = require("./app");
 
 /**
  * Get port from environment and store in Express.
  */
 
 const port = normalizePort(process.env.PORT || "3000");
-app.set("port", port);
+application.set("port", port);
 
 /**
  * Create HTTP server.
  */
 
-const server = http.createServer(app);
+const server = http.createServer(application);
 
 /**
  * Listen on provided port, on all network interfaces.

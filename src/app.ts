@@ -1,11 +1,9 @@
-import { Request, Response } from "express";
-
 const express = require("express");
+
+const getHello = require("./api/getHello");
 
 const app = express();
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("hello!");
-});
+app.get("/", getHello);
 
 module.exports = app;
