@@ -2,6 +2,7 @@ const rootDir = require("app-root-path");
 const express = require("express");
 
 const getHello = require("./api/getHello");
+const postLike = require("./api/postLike");
 
 interface loadSettingsReturn {
   port: number;
@@ -33,5 +34,6 @@ try {
 // ルーティング
 const app = express();
 app.get(rootUrl, getHello);
+app.post(rootUrl + "/postLike/:id", postLike);
 
 module.exports = app;
