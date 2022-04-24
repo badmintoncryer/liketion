@@ -21,7 +21,9 @@
     ]
   },
   "dependencies": {
-    "express": "^4.17.3"
+    "app-root-path": "^3.0.0",
+    "express": "^4.17.3",
+    "js-yaml": "^4.1.0"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
