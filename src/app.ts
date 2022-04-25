@@ -32,10 +32,14 @@ try {
   console.error(error);
 }
 
-// ルーティング
 const app = express();
+//POSTできたりするように（おまじない）
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// ルーティング
 app.get(rootUrl, getHello);
 app.post(rootUrl + "/postLike/:id", postLike);
-app.get(rootUrl + "/getLikes", getLikes);
+app.get(rootUrl + "/getLikes/:id", getLikes);
 
 module.exports = app;
