@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-const db = require("../db/create");
+const db = require("../database/create");
 
 type Like = {
   id: number;
