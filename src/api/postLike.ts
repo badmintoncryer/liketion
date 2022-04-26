@@ -1,25 +1,19 @@
 import { Request, Response } from "express";
 
+import { Like } from "../database/type";
+
 const db = require("../database/create");
-
-type Like = {
-  id: number;
-  contentId: string;
-};
-
-const sendError = (res: Response, status: number, message: string): void => {
-  console.error("database error: " + message);
-  res.status(status).json({
-    status: "database error",
-    message: message,
-  });
-};
+const sendError = require("../util/sendError");
 
 // いいねを登録する
-// TODO 同一の名前が登録されている場合、登録を行わない
 const postLike = (req: Request, res: Response): void => {
   const contentId: string = req.params.id;
   const name: string = req.body.name;
+  // パラメータのチェック
+  if (typeof contentId !== "string" || typeof name !== "string") {
+    sendError(res, 400, "invalid request");
+    return;
+  }
   // 同一のcontentId, nameの組み合わせでの登録が行われているかを確認
   db.all(
     "select * from likes where contentId = ? and name = ?",

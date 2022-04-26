@@ -1,22 +1,23 @@
 import { Request, Response } from "express";
 
-const db = require("../database/create");
+import { Like } from "../database/type";
 
-type Like = {
-  id: number;
-  contentId: string;
-};
+const db = require("../database/create");
+const sendError = require("../util/sendError");
 
 // いいね一覧を取得する
 const getLikes = (req: Request, res: Response): void => {
   const contentId: string = req.params.id;
+  if (typeof contentId !== "string") {
+    res.status(400).json({
+      status: "invalid request",
+    });
+    return;
+  }
+  // contentIdに紐づくいいねを取得
   db.all("select * from likes where contentId = ?", contentId, (error: { message: string }, row: Like[]) => {
     if (error) {
-      console.error("database error: " + error.message);
-      res.status(500).json({
-        status: "database error",
-        message: error.message,
-      });
+      sendError(res, 500, error.message);
     } else {
       console.log(row);
       res.status(200).json({
