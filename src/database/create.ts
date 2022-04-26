@@ -11,7 +11,7 @@ const db = new sqlite3.Database("./db/liketion.sqlite3", (error: { message: stri
         "create table if not exists likes( \
                 id integer primary key autoincrement, \
                 contentId nvwchar(255), \
-                name nverchar(32) \
+                name nverchar(64) \
             )",
         (error: { message: string }) => {
           if (error) {

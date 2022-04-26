@@ -5,12 +5,23 @@ import { Like } from "../database/type";
 const db = require("../database/create");
 const sendError = require("../util/sendError");
 
+const isParameterInvalid = (contentId: string, name: string): boolean => {
+  return (
+    typeof contentId !== "string" ||
+    typeof name !== "string" ||
+    contentId.length > 255 ||
+    name.length > 64 ||
+    contentId.length === 0 ||
+    name.length === 0
+  );
+};
+
 // いいねを登録する
 const postLike = (req: Request, res: Response): void => {
   const contentId: string = req.params.id;
   const name: string = req.body.name;
   // パラメータのチェック
-  if (typeof contentId !== "string" || typeof name !== "string") {
+  if (isParameterInvalid(contentId, name)) {
     sendError(res, 400, "invalid request");
     return;
   }
