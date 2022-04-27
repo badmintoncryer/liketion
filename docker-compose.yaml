@@ -7,7 +7,7 @@ services:
     container_name: liketion
     volumes:
       - /usr/src/node_modules
-      - .:/usr/src/app
+      - ./db:/usr/src/app/db
     command: yarn dev
     ports:
       - "3000:3000"
