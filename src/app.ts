@@ -5,11 +5,21 @@ const getHello = require("./api/getHello");
 const getLikes = require("./api/getLikes");
 const postLike = require("./api/postLike");
 
+/**
+ * List of settings.
+ *
+ * @interface loadSettingsReturn
+ */
 interface loadSettingsReturn {
   port: number;
   rootPath: string;
 }
-// yamlから設定をロード
+
+/**
+ * Function to load settings from settings.yaml.
+ *
+ * @return {loadSettingsReturn}
+ */
 const loadSettings = (): loadSettingsReturn => {
   const fs = require("fs");
   const yaml = require("js-yaml");
@@ -21,6 +31,12 @@ interface getRootUrlProps {
   port: number;
   rootPath: string;
 }
+/**
+ * Function to retrieve rootUrl
+ *
+ * @param {getRootUrlProps} settings - The settings.
+ * @return {string} - The rootUrl.
+ */
 const getRootUrl = (settings: getRootUrlProps): string => {
   return settings.rootPath || "/";
 };

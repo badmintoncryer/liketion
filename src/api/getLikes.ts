@@ -5,11 +5,23 @@ import { Like } from "../database/type";
 const db = require("../database/create");
 const sendError = require("../util/sendError");
 
+/**
+ * Function to determine whether the parameters for retrieving a like in the DB are incomplete.
+ *
+ * @param {string} contentId - The content ID.
+ * @return {boolean}
+ */
 const isParameterInvalid = (contentId: string): boolean => {
   return typeof contentId !== "string" || contentId.length > 255 || contentId.length === 0;
 };
 
-// いいね一覧を取得する
+/**
+ * Function to retrieve a list of likes
+ *
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.
+ * @return {void}
+ */
 const getLikes = (req: Request, res: Response): void => {
   const contentId: string = req.params.id;
   if (isParameterInvalid(contentId)) {
