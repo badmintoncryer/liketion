@@ -1,3 +1,5 @@
+import { Buffer } from "buffer";
+
 import { Request, Response } from "express";
 
 import { Like } from "../database/type";
@@ -5,6 +7,13 @@ import { Like } from "../database/type";
 const db = require("../database/create");
 const sendError = require("../util/sendError");
 
+/**
+ * Function to determine whether the parameters for registering a like in the DB are incomplete.
+ *
+ * @param {string} contentId - The content ID.
+ * @param {string} name - The user name.
+ * @return {boolean}
+ */
 const isParameterInvalid = (contentId: string, name: string): boolean => {
   return (
     typeof contentId !== "string" ||
@@ -16,12 +25,40 @@ const isParameterInvalid = (contentId: string, name: string): boolean => {
   );
 };
 
-// いいねを登録する
+/**
+ * Function to retrieve username and email from the credentials granted
+ * by AWS Application Load Balancer.
+ *
+ * @param {Request} req - The request object.
+ * @return {{ name: string; email: string }} - The username and email.
+ */
+const getUserInfo = (req: Request): { name: string; email: string } => {
+  const oidcData = req.headers["x-amazon-oidc-data"];
+  if (oidcData && typeof oidcData === "string") {
+    // JWT形式の文字列からpayloadを取得
+    const payload = oidcData.split(".")[1];
+    // payloadをdecodeしてjson形式に変換
+    const decoded = JSON.parse(Buffer.from(payload, "base64").toString("utf8"));
+
+    return { name: decoded.name, email: decoded.email };
+  } else {
+    return { name: "", email: "" };
+  }
+};
+
+/**
+ * Function to register a like.
+ *
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.
+ * @return {void}
+ */
 const postLike = (req: Request, res: Response): void => {
+  const { name } = getUserInfo(req);
   const contentId: string = req.params.id;
-  const name: string = req.body.name;
+  const userName: string = name || req.body.name;
   // パラメータのチェック
-  if (isParameterInvalid(contentId, name)) {
+  if (isParameterInvalid(contentId, userName)) {
     sendError(res, 400, "invalid request");
     return;
   }
@@ -29,21 +66,21 @@ const postLike = (req: Request, res: Response): void => {
   db.all(
     "select * from likes where contentId = ? and name = ?",
     contentId,
-    name,
+    userName,
     (error: { message: string }, row: Like[]) => {
       if (error) {
         sendError(res, 500, error.message);
       } else {
         // 同一の名前が登録されていない場合、登録を行う
         if (row.length === 0) {
-          db.run("insert into likes(contentId,name) values(?,?)", contentId, name, (error: { message: string }) => {
+          db.run("insert into likes(contentId,name) values(?,?)", contentId, userName, (error: { message: string }) => {
             if (error) {
               sendError(res, 500, error.message);
             } else {
               res.status(200).json({
                 status: "OK",
                 contentId: contentId,
-                name: name,
+                name: userName,
               });
             }
           });
@@ -52,7 +89,7 @@ const postLike = (req: Request, res: Response): void => {
           res.status(200).json({
             status: "Already Registered",
             contentId: contentId,
-            name: name,
+            name: userName,
           });
         }
       }
