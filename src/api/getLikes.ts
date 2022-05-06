@@ -23,6 +23,7 @@ const isParameterInvalid = (contentId: string): boolean => {
  * @return {void}
  */
 const getLikes = (req: Request, res: Response): void => {
+  console.log("getLikes is called");
   const contentId: string = req.params.id;
   if (isParameterInvalid(contentId)) {
     res.status(400).json({

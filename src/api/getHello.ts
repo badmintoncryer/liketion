@@ -7,6 +7,7 @@ import { Request, Response } from "express";
  * @param {Response} res
  */
 const getHello = (_req: Request, res: Response): void => {
+  console.log("getHello is called");
   res.send("Liketion is working properly.");
 };
 

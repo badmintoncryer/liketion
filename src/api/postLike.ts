@@ -33,14 +33,18 @@ const isParameterInvalid = (contentId: string, name: string): boolean => {
  * @return {{ name: string; email: string }} - The username and email.
  */
 const getUserInfo = (req: Request): { name: string; email: string } => {
-  const oidcData = req.headers["x-amazon-oidc-data"];
+  console.log("getUserInfo is called");
+  const oidcData = req.headers["x-amzn-oidc-data"];
+  console.log("oidcData is: ", oidcData);
   if (oidcData && typeof oidcData === "string") {
     // JWT形式の文字列からpayloadを取得
     const payload = oidcData.split(".")[1];
     // payloadをdecodeしてjson形式に変換
     const decoded = JSON.parse(Buffer.from(payload, "base64").toString("utf8"));
 
-    return { name: decoded.name, email: decoded.email };
+    // TODO decoded.nameからdecoded.usernameに変換する必要があるかも。
+    // TODO ALBが付与するx-amzn-oidc-dataの仕様を確認する
+    return { name: decoded.name || "", email: decoded.email || "" };
   } else {
     return { name: "", email: "" };
   }
@@ -54,9 +58,11 @@ const getUserInfo = (req: Request): { name: string; email: string } => {
  * @return {void}
  */
 const postLike = (req: Request, res: Response): void => {
-  const { name } = getUserInfo(req);
+  console.log("postLike is called");
+  const { name, email } = getUserInfo(req);
   const contentId: string = req.params.id;
-  const userName: string = name || req.body.name;
+  // x-amzn-oidc-dataに含まれるname > email > body.nameの優先度でuserNameを決定する
+  const userName: string = name || email || req.body.name;
   // パラメータのチェック
   if (isParameterInvalid(contentId, userName)) {
     sendError(res, 400, "invalid request");
@@ -77,6 +83,10 @@ const postLike = (req: Request, res: Response): void => {
             if (error) {
               sendError(res, 500, error.message);
             } else {
+              console.log({
+                contentId: contentId,
+                name: userName,
+              });
               res.status(200).json({
                 status: "OK",
                 contentId: contentId,
