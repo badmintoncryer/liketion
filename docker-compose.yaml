@@ -1,0 +1,13 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: liketion
+    volumes:
+      - /usr/src/node_modules
+      - ./db:/usr/src/app/db
+    command: yarn dev
+    ports:
+      - "3000:3000"
