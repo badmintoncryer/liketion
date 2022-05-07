@@ -8,6 +8,8 @@ import { Response } from "express";
  * @param {string} message - The error message.
  */
 const sendError = (res: Response, status: number, message: string): void => {
+  console.log("sendError is called");
+  console.log(res);
   console.error("database error: " + message);
   res.status(status).json({
     status: "database error",
