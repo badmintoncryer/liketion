@@ -1,16 +1,8 @@
 import fs from "fs";
 
 import { Database } from "sqlite3";
-import { v4 as uuidv4 } from "uuid";
 
 const sqlite3 = require("sqlite3");
-
-/**
- * Generate random DB names
- *
- * @return {string}
- */
-const getRandomDbPath = (): string => `./test_db/${uuidv4()}.sqlite`;
 
 /**
  * Create an independent DB for each test to ensure test independence
@@ -18,8 +10,8 @@ const getRandomDbPath = (): string => `./test_db/${uuidv4()}.sqlite`;
  * @param {string} randomDbPath
  * @return {Database}
  */
-const createDbConnection = (randomDbPath: string): Database => {
-  const db: Database = new sqlite3.Database(randomDbPath, (error: { message: string }) => {
+const createDbConnection = (): Database => {
+  const db: Database = new sqlite3.Database("./db/test.sqlite", (error: { message: string }) => {
     if (error) {
       console.error("database error: " + error.message);
     } else {
@@ -53,6 +45,6 @@ const deleteDbFile = (dbPath: string): void => {
   fs.unlinkSync(dbPath);
 };
 
-const db = createDbConnection(getRandomDbPath());
+const db = createDbConnection();
 
 module.exports = db;

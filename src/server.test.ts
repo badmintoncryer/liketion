@@ -1,5 +1,8 @@
 // import { createDbConnection, getRandomDbPath } from "./tests/setup/database";
+const fs = require("fs");
+
 const rootDir = require("app-root-path");
+const yaml = require("js-yaml");
 const request = require("supertest");
 
 const testServer = require("./server");
@@ -22,8 +25,6 @@ interface loadSettingsReturn {
  * @return {loadSettingsReturn}
  */
 export const loadSettings = (): loadSettingsReturn => {
-  const fs = require("fs");
-  const yaml = require("js-yaml");
   const yamlText = fs.readFileSync(`${rootDir}/config/settings.yaml`, "utf8");
   return yaml.load(yamlText);
 };
@@ -44,6 +45,12 @@ export const getRootUrl = (settings: getRootUrlProps): string => {
 
 afterAll(() => {
   testServer.close();
+  // testに用いたDBの削除
+  try {
+    fs.unlinkSync("./db/test.sqlite");
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 describe("APIのテスト", () => {
