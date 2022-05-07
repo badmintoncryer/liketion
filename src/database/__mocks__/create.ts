@@ -11,7 +11,7 @@ const sqlite3 = require("sqlite3");
  * @return {Database}
  */
 const createDbConnection = (): Database => {
-  const db: Database = new sqlite3.Database("./db/test.sqlite", (error: { message: string }) => {
+  const db: Database = new sqlite3.Database("./src/tests/test.sqlite", (error: { message: string }) => {
     if (error) {
       console.error("database error: " + error.message);
     } else {

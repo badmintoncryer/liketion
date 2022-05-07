@@ -5,9 +5,9 @@ const rootDir = require("app-root-path");
 const yaml = require("js-yaml");
 const request = require("supertest");
 
-const testServer = require("./server");
+const testServer = require("../server");
 
-jest.mock("./database/create");
+jest.mock("../database/create");
 
 /**
  * List of settings.
@@ -47,7 +47,7 @@ afterAll(() => {
   testServer.close();
   // testに用いたDBの削除
   try {
-    fs.unlinkSync("./db/test.sqlite");
+    fs.unlinkSync("./src/tests/test.sqlite");
   } catch (error) {
     console.log(error);
   }
