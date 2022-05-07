@@ -11,7 +11,9 @@
     "build-watch": "npx tsc -w",
     "dev": "yarn run build-watch & yarn start",
     "prepare": "husky install",
-    "test": "jest --coverage"
+    "test": "jest --ci --coverage",
+    "test:coverage": "yarn test",
+    "test:badges": "yarn test && jest-coverage-badges"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,md}": [
@@ -46,6 +48,7 @@
     "eslint-plugin-import": "^2.26.0",
     "husky": "^7.0.0",
     "jest": "^28.1.0",
+    "jest-coverage-badges": "^1.1.2",
     "lint-staged": "^12.4.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.6.2",

@@ -29,4 +29,8 @@ jobs:
       - name: test
         run: |
           echo "Start testing..."
-          yarn test
+          yarn test:badges
+      - name: Generating coverage badges
+        uses: jpb06/jest-badges-action@latest
+          with:
+            branches: main

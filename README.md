@@ -8,11 +8,14 @@
   liketion - Simple container-based "like function" back-end
 </h2>
 
-<div align="center">
-  <a href="./LICENSE">
-    <img alt="LICENSE" src="https://img.shields.io/badge/license-MIT-blue.svg?maxAge=43200">
-  </a>
-</div>
+[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/badmintoncryer/liketion)
+![example workflow](https://github.com/badmintoncryer/liketion/actions/workflows/test.yaml/badge.svg)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/badmintoncryer/liketion/issues)
+![Coverage:lines](coverage/badge-lines.svg)
+![Coverage:functions](coverage/badge-functions.svg)
+![Coverage:branches](coverage/badge-branches.svg)
+![Coverage:statements](coverage/badge-statements.svg)
+![Licence](https://img.shields.io/badge/license-MIT-blue.svg?maxAge=43200)
 
 [ English | [日本語版](README-ja.md) ]
 
