@@ -31,6 +31,8 @@ server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
 
+module.exports = server;
+
 /**
  * Normalize a port into a number, string, or false.
  */

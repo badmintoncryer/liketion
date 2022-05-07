@@ -1,7 +1,9 @@
+import { Database } from "sqlite3";
+
 const sqlite3 = require("sqlite3");
 
 //sqlite3関連設定
-const db = new sqlite3.Database("./db/liketion.sqlite3", (error: { message: string }) => {
+const db: Database = new sqlite3.Database("./db/liketion.sqlite3", (error: { message: string }) => {
   if (error) {
     console.error("database error: " + error.message);
   } else {

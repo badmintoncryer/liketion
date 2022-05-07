@@ -1,0 +1,32 @@
+name: jest test
+on:
+  push:
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 30
+    steps:
+      # checkout
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      # cacheの設定
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: yarn
+          cache-dependency-path: ./yarn.lock
+      # packageのインストール
+      - name: install dependencies
+        run: |
+          yarn install
+      # test
+      - name: test
+        run: |
+          echo "Start testing..."
+          yarn test:badges
