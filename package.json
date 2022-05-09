@@ -9,7 +9,7 @@
     "start": "nodemon ./dist/server.js",
     "build": "npx tsc",
     "build-watch": "npx tsc -w",
-    "dev": "yarn run build-watch & yarn start",
+    "dev": "yarn run build && yarn start",
     "prepare": "husky install",
     "test": "jest --ci --coverage",
     "test:coverage": "yarn test",
