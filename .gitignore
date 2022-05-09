@@ -1,7 +1,7 @@
 # Javascript
 node_modules/
 dist/
-db/
+db/liketion.sqlite3
 
 .vscode/
 
