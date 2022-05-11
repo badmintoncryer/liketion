@@ -5,7 +5,7 @@
 </div>
 
 <h2 align="center">
-  liketion - Simple container-based "like function" back-end
+  liketion - Simple container-based "like button" back-end
 </h2>
 
 [![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/badmintoncryer/liketion)
@@ -19,7 +19,7 @@
 
 [ English | [日本語版](README-ja.md) ]
 
-liketion provides a simple container-based back-end for the "like function".
+liketion provides a simple container-based back-end for the "like button".
 If you want to add a like function to your blog, page or other content,
 you can set up a liketion server to manage likes via a REST API.
 
