@@ -94,13 +94,13 @@ docker compose up
 ## post like example
 
 ```shell
-curl -X POST -H "Content-Type: application/json" -d '{"name": "user name"}' http://localhost:3000/root_path/postLike/unique_id
+curl -X POST -H "Content-Type: application/json" -d '{"name": "user name"}' http://localhost:3000/root_path/unique_id
 ```
 
 ## get likes example
 
 ```shell
-curl http://loaclhost:3000/root_path/getLikes/unique_id
+curl http://loaclhost:3000/root_path/unique_id
 ```
 
 # QuickStart
@@ -150,7 +150,7 @@ API to register a like. Registration in the DB as a pair of unique IDs and names
 ### endpoint
 
 ```shell
-POST https://example.com/{ROOT_PATH}/postLike/${id}
+POST https://example.com/{ROOT_PATH}/${id}
 ```
 
 ### request body parameter
@@ -170,7 +170,7 @@ POST https://example.com/{ROOT_PATH}/postLike/${id}
 ### example
 
 ```shell
-$ POST https://example.com/root_path/postLike/page_１ {"name": "Taro"}
+$ POST https://example.com/root_path/page_１ {"name": "Taro"}
 {
     "status": "OK",
     "contentId": "page_1",
@@ -178,7 +178,7 @@ $ POST https://example.com/root_path/postLike/page_１ {"name": "Taro"}
 }
 
 // Execute the same request again.
-$ POST https://example.com/root_path/postLike/page_１ {"name": "Taro"}
+$ POST https://example.com/root_path/page_１ {"name": "Taro"}
 {
     "status": "Already Registered",
     "contentId": "hoge",
@@ -194,7 +194,7 @@ API to get the list of likes associated with a unique ID as an array.
 ### endpoint
 
 ```shell
-GET https://example.com/{ROOT_PATH}/getLikes/${id}
+GET https://example.com/{ROOT_PATH}/${id}
 ```
 
 ### return
@@ -215,7 +215,7 @@ GET https://example.com/{ROOT_PATH}/getLikes/${id}
 ### example
 
 ```shell
-$ GET https://example.com/root_path/postLike/page_１
+$ GET https://example.com/root_path/page_１
 {
   "status": "OK",
   "likes":[
@@ -259,7 +259,7 @@ The name parameter can also be specified in the request body, but it is overridd
 #### example1
 
 ```shell
-$ POST https://example.com/root_path/postLike/page_１ (without request body)
+$ POST https://example.com/root_path/page_１ (without request body)
 
 The payload of x-amzn-oidc-data is
 {
@@ -283,7 +283,7 @@ return is
 #### example2
 
 ```shell
-$ POST https://example.com/root_path/postLike/page_１ (without request body)
+$ POST https://example.com/root_path/page_１ (without request body)
 
 The payload of x-amzn-oidc-data is
 {
@@ -305,7 +305,7 @@ return is
 #### example3
 
 ```shell
-$ POST https://example.com/root_path/postLike/page_１ {"name": "Taro"}
+$ POST https://example.com/root_path/page_１ {"name": "Taro"}
 
 The payload of x-amzn-oidc-data is
 {
