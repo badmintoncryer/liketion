@@ -50,7 +50,7 @@ you can set up a liketion server to manage likes via a REST API.
     - [example](#example-1)
   - [deleteLike](#deletelike)
     - [endpoint](#endpoint-2)
-    - [リクエストボディパラメータ](#リクエストボディパラメータ)
+    - [Request body parameter](#request-body-parameter-1)
     - [return](#return-2)
     - [example](#example-2)
 - [Integration with AWS Authenticated ALB and ECS](#integration-with-aws-authenticated-alb-and-ecs)
@@ -248,7 +248,7 @@ API for deleting Likes associated with unique ID.
 GET https://example.com/{ROOT_PATH}/${id}
 ```
 
-### リクエストボディパラメータ
+### Request body parameter
 
 | key  | value    | description                                                                                                                               |
 | ---- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
