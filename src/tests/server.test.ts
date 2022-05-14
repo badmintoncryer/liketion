@@ -66,7 +66,7 @@ describe("APIのテスト", () => {
     test("正常登録のテスト_1", async () => {
       const rootUrl = getRootUrl(loadSettings());
       const response = await request(testServer)
-        .post(rootUrl + "/postLike/1")
+        .post(rootUrl + "/1")
         .send({
           name: "test user",
           contentId: "hogehoge",
@@ -76,7 +76,7 @@ describe("APIのテスト", () => {
     test("正常登録のテスト_2", async () => {
       const rootUrl = getRootUrl(loadSettings());
       const response = await request(testServer)
-        .post(rootUrl + "/postLike/1")
+        .post(rootUrl + "/1")
         .send({
           name: "test user2",
           contentId: "hogehoge",
@@ -86,7 +86,7 @@ describe("APIのテスト", () => {
     test("既に登録されているデータを再登録するテスト", async () => {
       const rootUrl = getRootUrl(loadSettings());
       const response = await request(testServer)
-        .post(rootUrl + "/postLike/1")
+        .post(rootUrl + "/1")
         .send({
           name: "test user",
           contentId: "hogehoge",
@@ -96,7 +96,7 @@ describe("APIのテスト", () => {
     test("登録失敗するテスト", async () => {
       const rootUrl = getRootUrl(loadSettings());
       const response = await request(testServer)
-        .post(rootUrl + "/postLike/1")
+        .post(rootUrl + "/1")
         .send({
           name: "test userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
           contentId: "hogehoge",
@@ -107,14 +107,14 @@ describe("APIのテスト", () => {
   describe("getLikesのテスト", () => {
     test("正常取得のテスト_1", async () => {
       const rootUrl = getRootUrl(loadSettings());
-      const response = await request(testServer).get(rootUrl + "/getLikes/1");
+      const response = await request(testServer).get(rootUrl + "/1");
       expect(response.text).toBe(
         '{"status":"OK","likes":[{"id":1,"contentId":"1","name":"test user"},{"id":2,"contentId":"1","name":"test user2"}]}'
       );
     });
     test("空データの取得テスト", async () => {
       const rootUrl = getRootUrl(loadSettings());
-      const response = await request(testServer).get(rootUrl + "/getLikes/2");
+      const response = await request(testServer).get(rootUrl + "/2");
       expect(response.text).toBe('{"status":"OK","likes":[]}');
     });
   });
