@@ -55,7 +55,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // ルーティング
 app.get(rootUrl, getHello);
-app.post(rootUrl + "/postLike/:id", postLike);
-app.get(rootUrl + "/getLikes/:id", getLikes);
+app.post(rootUrl + "/:id", postLike);
+app.get(rootUrl + "/:id", getLikes);
 
 module.exports = app;
