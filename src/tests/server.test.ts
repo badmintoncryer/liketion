@@ -69,7 +69,6 @@ describe("APIのテスト", () => {
         .post(rootUrl + "/1")
         .send({
           name: "test user",
-          contentId: "hogehoge",
         });
       expect(response.text).toBe('{"status":"OK","contentId":"1","name":"test user"}');
     });
@@ -79,7 +78,6 @@ describe("APIのテスト", () => {
         .post(rootUrl + "/1")
         .send({
           name: "test user2",
-          contentId: "hogehoge",
         });
       expect(response.text).toBe('{"status":"OK","contentId":"1","name":"test user2"}');
     });
@@ -89,7 +87,6 @@ describe("APIのテスト", () => {
         .post(rootUrl + "/1")
         .send({
           name: "test user",
-          contentId: "hogehoge",
         });
       expect(response.text).toBe('{"status":"Already Registered","contentId":"1","name":"test user"}');
     });
@@ -99,7 +96,6 @@ describe("APIのテスト", () => {
         .post(rootUrl + "/1")
         .send({
           name: "test userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
-          contentId: "hogehoge",
         });
       expect(response.text).toBe('{"status":"database error","message":"invalid request"}');
     });
@@ -107,15 +103,82 @@ describe("APIのテスト", () => {
   describe("getLikesのテスト", () => {
     test("正常取得のテスト_1", async () => {
       const rootUrl = getRootUrl(loadSettings());
-      const response = await request(testServer).get(rootUrl + "/1");
+      await request(testServer)
+        .post(rootUrl + "/2")
+        .send({
+          name: "test user1",
+        });
+      await request(testServer)
+        .post(rootUrl + "/2")
+        .send({
+          name: "test user2",
+        });
+      await request(testServer)
+        .post(rootUrl + "/2")
+        .send({
+          name: "test user3",
+        });
+      const response = await request(testServer).get(rootUrl + "/2");
       expect(response.text).toBe(
-        '{"status":"OK","likes":[{"id":1,"contentId":"1","name":"test user"},{"id":2,"contentId":"1","name":"test user2"}]}'
+        '{"status":"OK","likes":[{"id":3,"contentId":"2","name":"test user1"},{"id":4,"contentId":"2","name":"test user2"},{"id":5,"contentId":"2","name":"test user3"}]}'
       );
     });
     test("空データの取得テスト", async () => {
       const rootUrl = getRootUrl(loadSettings());
-      const response = await request(testServer).get(rootUrl + "/2");
+      const response = await request(testServer).get(rootUrl + "/5");
       expect(response.text).toBe('{"status":"OK","likes":[]}');
+    });
+  });
+  describe("deleteLikeのテスト", () => {
+    test("正常削除のテスト", async () => {
+      const rootUrl = getRootUrl(loadSettings());
+      await request(testServer)
+        .post(rootUrl + "/3")
+        .send({
+          name: "test user1",
+        });
+      await request(testServer)
+        .post(rootUrl + "/3")
+        .send({
+          name: "test user2",
+        });
+      await request(testServer)
+        .post(rootUrl + "/3")
+        .send({
+          name: "test user3",
+        });
+      const response = await request(testServer).get(rootUrl + "/3");
+      expect(response.text).toBe(
+        '{"status":"OK","likes":[{"id":6,"contentId":"3","name":"test user1"},{"id":7,"contentId":"3","name":"test user2"},{"id":8,"contentId":"3","name":"test user3"}]}'
+      );
+      const response2 = await request(testServer)
+        .delete(rootUrl + "/3")
+        .send({
+          name: "test user2",
+        });
+      expect(response2.text).toBe('{"status":"OK","contentId":"3","name":"test user2"}');
+      const response3 = await request(testServer).get(rootUrl + "/3");
+      expect(response3.text).toBe(
+        '{"status":"OK","likes":[{"id":6,"contentId":"3","name":"test user1"},{"id":8,"contentId":"3","name":"test user3"}]}'
+      );
+      const response4 = await request(testServer).delete(rootUrl + "/3");
+      expect(response4.text).toBe('{"status":"OK","contentId":"3"}');
+      const response5 = await request(testServer).get(rootUrl + "/3");
+      expect(response5.text).toBe('{"status":"OK","likes":[]}');
+    });
+    test("存在しない単一のイイねを削除する場合のテスト", async () => {
+      const rootUrl = getRootUrl(loadSettings());
+      const response = await request(testServer)
+        .delete(rootUrl + "/4")
+        .send({
+          name: "test user2",
+        });
+      expect(response.text).toBe('{"status":"Not Registered","contentId":"4","name":"test user2"}');
+    });
+    test("存在しないイイねを一括削除する場合のテスト", async () => {
+      const rootUrl = getRootUrl(loadSettings());
+      const response = await request(testServer).delete(rootUrl + "/4");
+      expect(response.text).toBe('{"status":"Not Registered","contentId":"4"}');
     });
   });
 });

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { Database } from "sqlite3";
 
 import { Like } from "../database/type";
 import { getUserInfo } from "../util/getUserInfo";
@@ -26,11 +27,11 @@ export const isParameterInvalid = (contentId: string, name: string): boolean => 
 /**
  * Function to delete all "Likes" associated with a specific contentId.
  *
- * @param {*} db - The database object.
+ * @param {Database} db - The database object.
  * @param {string} contentId - The content ID.
  * @param {Response} res - The response object.
  */
-const deleteAllLikes = (db: any, contentId: string, res: Response): void => {
+const deleteAllLikes = (db: Database, contentId: string, res: Response): void => {
   db.all("select * from likes where contentId = ?", contentId, (error: { message: string }, row: Like[]) => {
     if (error) {
       sendError(res, 500, error.message);
@@ -61,12 +62,12 @@ const deleteAllLikes = (db: any, contentId: string, res: Response): void => {
 /**
  * Function to delete like associated with a specific contentId, userName pair.
  *
- * @param {*} db - The database object.
+ * @param {Database} db - The database object.
  * @param {string} contentId - The content ID.
  * @param {string} userName - The user name.
  * @param {Response} res - The response object.
  */
-const deleteSingleLike = (db: any, contentId: string, userName: string, res: Response): void => {
+const deleteSingleLike = (db: Database, contentId: string, userName: string, res: Response): void => {
   db.all(
     "select * from likes where contentId = ? and name = ?",
     contentId,
