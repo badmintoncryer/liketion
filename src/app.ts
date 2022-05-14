@@ -1,6 +1,7 @@
 const rootDir = require("app-root-path");
 const express = require("express");
 
+const deleteLike = require("./api/deleteLike");
 const getHello = require("./api/getHello");
 const getLikes = require("./api/getLikes");
 const postLike = require("./api/postLike");
@@ -57,5 +58,6 @@ app.use(express.urlencoded({ extended: true }));
 app.get(rootUrl, getHello);
 app.post(rootUrl + "/:id", postLike);
 app.get(rootUrl + "/:id", getLikes);
+app.delete(rootUrl + "/:id", deleteLike);
 
 module.exports = app;

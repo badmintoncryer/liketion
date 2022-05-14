@@ -1,8 +1,7 @@
-import { Buffer } from "buffer";
-
 import { Request, Response } from "express";
 
 import { Like } from "../database/type";
+import { getUserInfo } from "../util/getUserInfo";
 
 const db = require("../database/create");
 const sendError = require("../util/sendError");
@@ -14,7 +13,7 @@ const sendError = require("../util/sendError");
  * @param {string} name - The user name.
  * @return {boolean}
  */
-const isParameterInvalid = (contentId: string, name: string): boolean => {
+export const isParameterInvalid = (contentId: string, name: string): boolean => {
   return (
     typeof contentId !== "string" ||
     typeof name !== "string" ||
@@ -23,31 +22,6 @@ const isParameterInvalid = (contentId: string, name: string): boolean => {
     contentId.length === 0 ||
     name.length === 0
   );
-};
-
-/**
- * Function to retrieve username and email from the credentials granted
- * by AWS Application Load Balancer.
- *
- * @param {Request} req - The request object.
- * @return {{ name: string; email: string }} - The username and email.
- */
-const getUserInfo = (req: Request): { name: string; email: string } => {
-  console.log("getUserInfo is called");
-  const oidcData = req.headers["x-amzn-oidc-data"];
-  console.log("oidcData is: ", oidcData);
-  if (oidcData && typeof oidcData === "string") {
-    // JWT形式の文字列からpayloadを取得
-    const payload = oidcData.split(".")[1];
-    // payloadをdecodeしてjson形式に変換
-    const decoded = JSON.parse(Buffer.from(payload, "base64").toString("utf8"));
-
-    // TODO decoded.nameからdecoded.usernameに変換する必要があるかも。
-    // TODO ALBが付与するx-amzn-oidc-dataの仕様を確認する
-    return { name: decoded.name || "", email: decoded.email || "" };
-  } else {
-    return { name: "", email: "" };
-  }
 };
 
 /**
