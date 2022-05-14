@@ -47,6 +47,11 @@ liketion はコンテナベースのシンプルなイイね機能バックエ�
     - [return](#return-1)
       - [like](#like)
     - [例](#例-1)
+  - [deleteLike](#deletelike)
+    - [endpoint](#endpoint-2)
+    - [リクエストボディパラメータ](#リクエストボディパラメータ-1)
+    - [return](#return-2)
+    - [例](#例-2)
 - [認証付き ALB との連携](#認証付き-alb-との連携)
   - [使い方](#使い方)
     - [使用例](#使用例)
@@ -93,13 +98,13 @@ docker compose up
 ## いいね登録の例
 
 ```shell
-curl -X POST -H "Content-Type: application/json" -d '{"name": "user name"}' http://localhost:3000/root_path/postLike/unique_id
+curl -X POST -H "Content-Type: application/json" -d '{"name": "user name"}' http://localhost:3000/root_path/unique_id
 ```
 
 ## いいね取得の例
 
 ```shell
-curl http://loaclhost:3000/root_path/getLikes/unique_id
+curl http://loaclhost:3000/root_path/unique_id
 ```
 
 # QuickStart
@@ -116,7 +121,7 @@ liketion が listen するポート番号を設定します。
 ### rootPath
 
 liketion が listen するルートパスを設定します。
-例えば、https://example.com/liketionをルートとしたい場合、`rootPath: '/liketion'`.と設定して下さい。
+例えば、<https://example.com/liketion>をルートとしたい場合、`rootPath: '/liketion'`.と設定して下さい。
 この時パス末尾のスラッシュは不要です。
 
 ## Running liketion
@@ -150,7 +155,7 @@ yarn dev
 ### endpoint
 
 ```shell
-POST https://example.com/{ROOT_PATH}/postLike/${id}
+POST https://example.com/{ROOT_PATH}/${id}
 ```
 
 ### リクエストボディパラメータ
@@ -170,7 +175,7 @@ POST https://example.com/{ROOT_PATH}/postLike/${id}
 ### 例
 
 ```shell
-$ POST https://example.com/root_path/postLike/page_１ {"name": "Taro"}
+$ POST https://example.com/root_path/page_１ {"name": "Taro"}
 {
     "status": "OK",
     "contentId": "page_1",
@@ -178,7 +183,7 @@ $ POST https://example.com/root_path/postLike/page_１ {"name": "Taro"}
 }
 
 // 同一のリクエストを再度実行
-$ POST https://example.com/root_path/postLike/page_１ {"name": "Taro"}
+$ POST https://example.com/root_path/page_１ {"name": "Taro"}
 {
     "status": "Already Registered",
     "contentId": "hoge",
@@ -194,7 +199,7 @@ $ POST https://example.com/root_path/postLike/page_１ {"name": "Taro"}
 ### endpoint
 
 ```shell
-GET https://example.com/{ROOT_PATH}/getLikes/${id}
+GET https://example.com/{ROOT_PATH}/${id}
 ```
 
 ### return
@@ -215,7 +220,7 @@ GET https://example.com/{ROOT_PATH}/getLikes/${id}
 ### 例
 
 ```shell
-$ GET https://example.com/root_path/postLike/page_１
+$ GET https://example.com/root_path/page_１
 {
   "status": "OK",
   "likes":[
@@ -230,6 +235,51 @@ $ GET https://example.com/root_path/postLike/page_１
       "name":"Jiro"
     }
   ]
+}
+```
+
+## deleteLike
+
+ユニーク ID に紐付いたイイねを削除する API
+
+### endpoint
+
+```shell
+GET https://example.com/{ROOT_PATH}/${id}
+```
+
+### リクエストボディパラメータ
+
+| key  | value    | description                                                                                                    |
+| ---- | -------- | -------------------------------------------------------------------------------------------------------------- |
+| name | [string] | 削除したいイイねのユーザ名を指定する。name をパラメータとして渡さなかった場合、id に紐づくイイねを全て削除する |
+
+### return
+
+| key       | value                    | description                                           |
+| --------- | ------------------------ | ----------------------------------------------------- |
+| status    | "OK" or "Not Registered" | 削除対象が存在しなかった場合、"Not Registered" を返す |
+| contentId | [string]                 | ユニーク ID。(パスパラメータで渡されたもの)           |
+| name      | [string]                 | 名前として用いられたリクエストボディのパラメータ      |
+
+### 例
+
+```shell
+# page_1のTaroのイイねを削除する
+$ DELETE https://example.com/root_path/page_１ {"name": "Taro"}
+{
+  "status": "OK",
+  "contentId": "page_1",
+  "name": "Taro"
+}
+```
+
+```shell
+# page_1のイイねを全て削除する
+$ DELETE https://example.com/root_path/page_１
+{
+  "status": "OK",
+  "contentId": "page_1",
 }
 ```
 

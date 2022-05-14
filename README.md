@@ -48,6 +48,11 @@ you can set up a liketion server to manage likes via a REST API.
     - [return](#return-1)
       - [like](#like)
     - [example](#example-1)
+  - [deleteLike](#deletelike)
+    - [endpoint](#endpoint-2)
+    - [リクエストボディパラメータ](#リクエストボディパラメータ)
+    - [return](#return-2)
+    - [example](#example-2)
 - [Integration with AWS Authenticated ALB and ECS](#integration-with-aws-authenticated-alb-and-ecs)
   - [Usage](#usage)
     - [examples](#examples)
@@ -230,6 +235,51 @@ $ GET https://example.com/root_path/page_１
       "name":"Jiro"
     }
   ]
+}
+```
+
+## deleteLike
+
+API for deleting Likes associated with unique ID.
+
+### endpoint
+
+```shell
+GET https://example.com/{ROOT_PATH}/${id}
+```
+
+### リクエストボディパラメータ
+
+| key  | value    | description                                                                                                                               |
+| ---- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| name | [string] | Specifies the username of the "like" to be deleted; if name is not passed as a parameter, all "likes" associated with the id are deleted. |
+
+### return
+
+| key       | value                    | description                                                          |
+| --------- | ------------------------ | -------------------------------------------------------------------- |
+| status    | "OK" or "Not Registered" | If the deletion target does not exist, "Not Registered" is returned. |
+| contentId | [string]                 | Unique ID.(as passed in the path parameter)                          |
+| name      | [string]                 | Parameters of the request body passed as name                        |
+
+### example
+
+```shell
+# Delete Taro's Like on page_1
+$ DELETE https://example.com/root_path/page_１ {"name": "Taro"}
+{
+  "status": "OK",
+  "contentId": "page_1",
+  "name": "Taro"
+}
+```
+
+```shell
+# Delete all page_1 likes.
+$ DELETE https://example.com/root_path/page_１
+{
+  "status": "OK",
+  "contentId": "page_1",
 }
 ```
 
