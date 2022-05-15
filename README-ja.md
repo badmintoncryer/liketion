@@ -78,7 +78,13 @@ cd liketion
 docker build . -t liketion
 ```
 
-また、以下コマンドから docker コンテナを起動させることができます。
+また、dockerhub からイメージを pull することもできます。
+
+```shell
+docker pull nixieminton/liketion:latest
+```
+
+以下コマンドから docker コンテナを起動させることができます。
 この時、/path/to/db は適切なものに変更して下さい。(DB には SQLite を用いているため、永続化を行うディレクトリを指定する必要があります。)
 
 ```shell
