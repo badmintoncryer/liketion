@@ -22,6 +22,12 @@
 liketion はコンテナベースのシンプルなイイね機能バックエンドを提供します。
 ブログや個人ページなどにイイね機能を導入したい場合、liketion サーバにより REST API 経由でイイね管理を行えます。
 
+<div align="center">
+  <a href="https://github.com/badmintoncryer/liketion">
+    <img alt="liketion" src="./static/liketion.gif">
+  </a>
+</div>
+
 # 目次
 
 - [目次](#目次)
@@ -36,6 +42,7 @@ liketion はコンテナベースのシンプルなイイね機能バックエ�
     - [port](#port)
     - [rootPath](#rootpath)
   - [Running liketion](#running-liketion)
+  - [sample application](#sample-application)
 - [Integration](#integration)
   - [postLike](#postlike)
     - [endpoint](#endpoint)
@@ -150,6 +157,24 @@ or
 ```shell
 yarn dev
 ```
+
+## sample application
+
+Liketion が http://localhost:3000 で listen している状態で、動作検証用のサンプルアプリを動作させることができます。
+
+```shell
+$ cd ./sample/sample-react-app
+$ yarn
+$ PORT=2345 yarn start
+```
+
+http://localhost:2345 にアクセスするとサンプルアプリにアクセスでき、liketion へイイねを登録させることができます。
+
+<div align="center">
+  <a href="https://github.com/badmintoncryer/liketion">
+    <img alt="liketion" src="./static/liketion.gif">
+  </a>
+</div>
 
 # Integration
 

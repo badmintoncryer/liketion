@@ -23,6 +23,12 @@ liketion provides a simple container-based back-end for the "like button".
 If you want to add a like function to your blog, page or other content,
 you can set up a liketion server to manage likes via a REST API.
 
+<div align="center">
+  <a href="https://github.com/badmintoncryer/liketion">
+    <img alt="liketion" src="./static/liketion.gif">
+  </a>
+</div>
+
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
@@ -37,6 +43,7 @@ you can set up a liketion server to manage likes via a REST API.
     - [port](#port)
     - [rootPath](#rootpath)
   - [Running liketion](#running-liketion)
+  - [sample application](#sample-application)
 - [Integration](#integration)
   - [postLike](#postlike)
     - [endpoint](#endpoint)
@@ -151,6 +158,24 @@ or
 ```shell
 yarn dev
 ```
+
+## sample application
+
+With the liketion container running on http://localhost:3000, you can run sample apps for verification.
+
+```shell
+$ cd ./sample/sample-react-app
+$ yarn
+$ PORT=2345 yarn start
+```
+
+Accessing the http://localhost:2345 allows you to access a sample application and register a 'like' to liketion.
+
+<div align="center">
+  <a href="https://github.com/badmintoncryer/liketion">
+    <img alt="liketion" src="./static/liketion.gif">
+  </a>
+</div>
 
 # Integration
 
