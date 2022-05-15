@@ -8,6 +8,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { ReactComponent as Logo } from "./static/blank-heart.svg";
 import "./App.css";
@@ -80,46 +82,55 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Box
-        // conponent="form"
-        // sx={{
-        //   "& > :not(style)": { m: 1, width: "25ch" },
-        // }}
-        // noValidate
-        // autoComplete="off"
-        >
-          <TextField id="name-input" label="name" variant="outlined" onChange={handleChangeNameInput} />
-          <TextField
-            id="content-id-input"
-            label="content ID"
-            variant="outlined"
-            onChange={handleChangeContentIdInput}
-          />
-          <Logo className="Like-logo" onClick={handleClick} />
-        </Box>
-        <div>
-          Total likes number (contentID = {contentId}) is {likes.length}
-        </div>
-        <TableContainer component={Paper} sx={{ width: "500px" }}>
-          <Table size="small">
-            <TableHead>
-              <TableRow>
-                {TABLE_HEADER.map((header) => (
-                  <TableCell key={header}>{header}</TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {likes.map((like) => (
-                <TableRow key={like.id}>
-                  <TableCell>{like.id}</TableCell>
-                  <TableCell>{like.name}</TableCell>
-                  <TableCell>{like.contentId}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <Grid container direction="column" justifyContent="space-evenly" alignItems="center" spacing={1}>
+          <Grid item>
+            <Box>
+              <Grid container direction="row" justifyContent="space-evenly" alignItems="center" spacing={3}>
+                <Grid item>
+                  <TextField id="name-input" label="name" variant="outlined" onChange={handleChangeNameInput} />
+                  <TextField
+                    id="content-id-input"
+                    label="content ID"
+                    variant="outlined"
+                    onChange={handleChangeContentIdInput}
+                  />
+                </Grid>
+                <Grid item>
+                  <Button variant="contained" onClick={handleClick}>
+                    Like!
+                  </Button>
+                </Grid>
+              </Grid>
+            </Box>
+          </Grid>
+          <Grid item>
+            <div>
+              Total likes number (contentID = {contentId}) is {likes.length}
+            </div>
+          </Grid>
+          <Grid item>
+            <TableContainer component={Paper} sx={{ width: "500px" }}>
+              <Table size="small">
+                <TableHead>
+                  <TableRow>
+                    {TABLE_HEADER.map((header) => (
+                      <TableCell key={header}>{header}</TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {likes.map((like) => (
+                    <TableRow key={like.id}>
+                      <TableCell>{like.id}</TableCell>
+                      <TableCell>{like.name}</TableCell>
+                      <TableCell>{like.contentId}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
+        </Grid>
       </header>
     </div>
   );
