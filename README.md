@@ -79,6 +79,12 @@ cd liketion
 docker build . -t liketion
 ```
 
+or you can pull the image from dockerhub
+
+```shell
+docker pull nixieminton/liketion:latest
+```
+
 And you can use the following command to spawn the Docker container.
 At this time, set the /path/to/db to the appropriate one.
 
