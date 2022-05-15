@@ -1,11 +1,19 @@
 import React from "react";
 import axios from "axios";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { ReactComponent as Logo } from "./static/blank-heart.svg";
 import "./App.css";
 
 const LIKETION_API_ROOT_URL = "http://localhost:3000/root_path";
+const TABLE_HEADER = ["id", "name", "contentId"];
 
 type Like = {
   id: number;
@@ -92,6 +100,26 @@ function App() {
         <div>
           Total likes number (contentID = {contentId}) is {likes.length}
         </div>
+        <TableContainer component={Paper} sx={{ width: "500px" }}>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                {TABLE_HEADER.map((header) => (
+                  <TableCell key={header}>{header}</TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {likes.map((like) => (
+                <TableRow key={like.id}>
+                  <TableCell>{like.id}</TableCell>
+                  <TableCell>{like.name}</TableCell>
+                  <TableCell>{like.contentId}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </header>
     </div>
   );
