@@ -1,3 +1,5 @@
+import cors from "cors";
+
 const rootDir = require("app-root-path");
 const express = require("express");
 
@@ -50,6 +52,9 @@ try {
 }
 
 const app = express();
+// CORS対応
+// TODO allowOriginとか設定出来るようにする
+app.use(cors());
 //POSTできたりするように（おまじない）
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
