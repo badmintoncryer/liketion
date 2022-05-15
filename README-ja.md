@@ -22,6 +22,12 @@
 liketion はコンテナベースのシンプルなイイね機能バックエンドを提供します。
 ブログや個人ページなどにイイね機能を導入したい場合、liketion サーバにより REST API 経由でイイね管理を行えます。
 
+<div align="center">
+  <a href="https://github.com/badmintoncryer/liketion">
+    <img alt="liketion" src="./static/liketion.gif">
+  </a>
+</div>
+
 # 目次
 
 - [目次](#目次)

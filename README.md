@@ -23,6 +23,12 @@ liketion provides a simple container-based back-end for the "like button".
 If you want to add a like function to your blog, page or other content,
 you can set up a liketion server to manage likes via a REST API.
 
+<div align="center">
+  <a href="https://github.com/badmintoncryer/liketion">
+    <img alt="liketion" src="./static/liketion.gif">
+  </a>
+</div>
+
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
