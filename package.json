@@ -51,7 +51,7 @@
     "husky": "^8.0.3",
     "jest": "^28.1.0",
     "jest-coverage-badges": "^1.1.2",
-    "lint-staged": "^12.4.0",
+    "lint-staged": "^13.2.3",
     "nodemon": "^3.0.1",
     "prettier": "^2.6.2",
     "supertest": "^6.3.3",
