@@ -42,7 +42,7 @@
     "@types/supertest": "^2.0.12",
     "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.20.0",
+    "@typescript-eslint/parser": "^5.62.0",
     "depcheck": "^1.4.3",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^9.0.0",
