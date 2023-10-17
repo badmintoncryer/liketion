@@ -43,7 +43,7 @@
     "@types/uuid": "^9.0.5",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
-    "depcheck": "^1.4.6",
+    "depcheck": "^1.4.7",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.1",
