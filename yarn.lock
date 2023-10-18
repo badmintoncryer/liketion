@@ -978,10 +978,10 @@
     "@types/mime" "^1"
     "@types/node" "*"
 
-"@types/sqlite3@^3.1.9":
-  version "3.1.9"
-  resolved "https://registry.yarnpkg.com/@types/sqlite3/-/sqlite3-3.1.9.tgz#15cab95ade27133cbf7f9da9f97d89b3006d2218"
-  integrity sha512-0lUJ/W1tBkWqC1is8AI6HnGyk0TyFRFBbcv/hfrUk9XZ7I6LhGvkr0KSPPSaPQyg69nks7JEbxS7tD+MXeVWuQ==
+"@types/sqlite3@^3.1.10":
+  version "3.1.10"
+  resolved "https://registry.yarnpkg.com/@types/sqlite3/-/sqlite3-3.1.10.tgz#dc9bd0bf4e523c094d9afe9d3b15a0c4cad6309c"
+  integrity sha512-1n4FdAvzRZA7hPnDKmkIZ7mWPR8bxdZTvGODgUK+bLgm7RfOUnBTFJNw48CRbYQYsL4e9LCa7qnxLVD4ikDQtw==
   dependencies:
     "@types/node" "*"
 
