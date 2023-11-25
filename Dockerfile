@@ -1,5 +1,5 @@
 # ビルドの実行
-FROM node:16.13.1-alpine as build-stage
+FROM node:20.10.0-alpine as build-stage
 COPY ./package* ./
 COPY ./yarn* ./
 RUN yarn
@@ -7,7 +7,7 @@ COPY . .
 RUN yarn build
 
 # runtime環境の作成
-FROM node:16.13.1-alpine
+FROM node:20.10.0-alpine
 WORKDIR /usr/src/app
 COPY --from=build-stage /dist ./dist/
 COPY --from=build-stage /node_modules ./node_modules/
