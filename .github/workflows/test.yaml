@@ -18,7 +18,7 @@ jobs:
       # cacheの設定
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
           cache: yarn
           cache-dependency-path: ./yarn.lock
       # packageのインストール
