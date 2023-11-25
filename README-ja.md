@@ -88,7 +88,7 @@ docker build . -t liketion
 また、dockerhub からイメージを pull することもできます。
 
 ```shell
-docker pull nixieminton/liketion:latest
+docker pull nixiemintonprivate/liketion:latest
 ```
 
 以下コマンドから docker コンテナを起動させることができます。

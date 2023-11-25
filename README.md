@@ -89,7 +89,7 @@ docker build . -t liketion
 or you can pull the image from dockerhub
 
 ```shell
-docker pull nixieminton/liketion:latest
+docker pull nixiemintonprivate/liketion:latest
 ```
 
 And you can use the following command to spawn the Docker container.
