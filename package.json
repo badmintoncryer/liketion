@@ -48,7 +48,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
-    "husky": "^8.0.3",
+    "husky": "^9.0.10",
     "jest": "^28.1.0",
     "jest-coverage-badges": "^1.1.2",
     "lint-staged": "^15.2.1",
